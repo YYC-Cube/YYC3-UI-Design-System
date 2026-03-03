@@ -11,9 +11,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 <!-- CI/CD Badges -->
-[![Build Status](https://github.com/YYC-Cube/YYC3-Design-System/actions/workflows/ci-cd-intelligent.yml/badge.svg)](https://github.com/YYC-Cube/YYC3-Design-System/actions)
-[![codecov](https://codecov.io/gh/YYC-Cube/YYC3-Design-System/branch/main/graph/badge.svg)](https://codecov.io/gh/YYC-Cube/YYC3-Design-System)
-[![CI/CD](https://img.shields.io/badge/CI%2FCD-Intelligent-blue)](https://github.com/YYC-Cube/YYC3-Design-System/actions)
+[![Build Status](https://github.com/YYC-Cube/YYC3-UI-Design-System/actions/workflows/ci-cd-intelligent.yml/badge.svg)](https://github.com/YYC-Cube/YYC3-UI-Design-System/actions)
+[![codecov](https://codecov.io/gh/YYC-Cube/YYC3-UI-Design-System/branch/main/graph/badge.svg)](https://codecov.io/gh/YYC-Cube/YYC3-UI-Design-System)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-Intelligent-blue)](https://github.com/YYC-Cube/YYC3-UI-Design-System/actions)
 
 <!-- Package Badges -->
 [![npm version](https://badge.fury.io/js/yyc3-design-system.svg)](https://www.npmjs.com/package/yyc3-design-system)
@@ -22,12 +22,12 @@
 [![Minified Size](https://badgen.net/bundlephobia/minzip/yyc3-design-system)](https://bundlephobia.com/result?p=yyc3-design-system)
 
 <!-- GitHub Badges -->
-[![GitHub stars](https://img.shields.io/github/stars/YYC-Cube/YYC3-Design-System?style=social)](https://github.com/YYC-Cube/YYC3-Design-System/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/YYC-Cube/YYC3-Design-System?style=social)](https://github.com/YYC-Cube/YYC3-Design-System/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/YYC-Cube/YYC3-Design-System)](https://github.com/YYC-Cube/YYC3-Design-System/issues)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/YYC-Cube/YYC3-Design-System)](https://github.com/YYC-Cube/YYC3-Design-System/pulls)
-[![GitHub contributors](https://img.shields.io/github/contributors/YYC-Cube/YYC3-Design-System?style=social)](https://github.com/YYC-Cube/YYC3-Design-System/graphs/contributors)
-[![GitHub last commit](https://img.shields.io/github/last-commit/YYC-Cube/YYC3-Design-System)](https://github.com/YYC-Cube/YYC3-Design-System/commits/main)
+[![GitHub stars](https://img.shields.io/github/stars/YYC-Cube/YYC3-UI-Design-System?style=social)](https://github.com/YYC-Cube/YYC3-UI-Design-System/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/YYC-Cube/YYC3-UI-Design-System?style=social)](https://github.com/YYC-Cube/YYC3-UI-Design-System/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/YYC-Cube/YYC3-UI-Design-System)](https://github.com/YYC-Cube/YYC3-UI-Design-System/issues)
+[![GitHub pull requests](https://img.shields.io/github/issues-pr/YYC-Cube/YYC3-UI-Design-System)](https://github.com/YYC-Cube/YYC3-UI-Design-System/pulls)
+[![GitHub contributors](https://img.shields.io/github/contributors/YYC-Cube/YYC3-UI-Design-System?style=social)](https://github.com/YYC-Cube/YYC3-UI-Design-System/graphs/contributors)
+[![GitHub last commit](https://img.shields.io/github/last-commit/YYC-Cube/YYC3-UI-Design-System)](https://github.com/YYC-Cube/YYC3-UI-Design-System/commits/main)
 
 <!-- Social Badges -->
 [![Twitter Follow](https://img.shields.io/twitter/follow/YYC_Cube?style=social)](https://twitter.com/YYC_Cube)
@@ -44,9 +44,9 @@
 [![pnpm](https://img.shields.io/badge/pnpm-8.0-F69220?style=flat&logo=pnpm&logoColor=white)](https://pnpm.io/)
 
 <!-- Status Badges -->
-[![Maintenance](https://img.shields.io/badge/Maintenance-Active-green.svg)](https://github.com/YYC-Cube/YYC3-Design-System)
+[![Maintenance](https://img.shields.io/badge/Maintenance-Active-green.svg)](https://github.com/YYC-Cube/YYC3-UI-Design-System)
 [![PR Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
-[![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9A%9C-lightgrey.svg)](https://github.com/YYC-Cube/YYC3-Design-System)
+[![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9A%9C-lightgrey.svg)](https://github.com/YYC-Cube/YYC3-UI-Design-System)
 
 ---
 
@@ -245,7 +245,7 @@ npm install yyc3-design-system
 
 ```bash
 # Clone the repository
-git clone https://github.com/YYC-Cube/YYC3-Design-System.git
+git clone https://github.com/YYC-Cube/YYC3-UI-Design-System.git
 cd YYC3-Design-System
 
 # Install dependencies
@@ -675,7 +675,7 @@ We welcome contributions from the community! Here's how you can help:
 ### Contribution Guidelines
 
 1. **Read the [Contributing Guide](CONTRIBUTING.md)**
-2. **Check [Open Issues](https://github.com/YYC-Cube/YYC3-Design-System/issues)**
+2. **Check [Open Issues](https://github.com/YYC-Cube/YYC3-UI-Design-System/issues)**
 3. **Create a Fork**
 4. **Create a Feature Branch** (`git checkout -b feature/amazing-feature`)
 5. **Make Your Changes**
@@ -688,7 +688,7 @@ We welcome contributions from the community! Here's how you can help:
 
 ```bash
 # Clone the repository
-git clone https://github.com/YYC-Cube/YYC3-Design-System.git
+git clone https://github.com/YYC-Cube/YYC3-UI-Design-System.git
 cd YYC3-Design-System
 
 # Install dependencies
@@ -753,7 +753,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### Community Contributors
 
-- All [contributors](https://github.com/YYC-Cube/YYC3-Design-System/graphs/contributors)
+- All [contributors](https://github.com/YYC-Cube/YYC3-UI-Design-System/graphs/contributors)
 
 ### Open Source Projects
 
@@ -776,8 +776,8 @@ This project uses the following open source packages:
 
 ### Get Help
 
-- **[GitHub Issues](https://github.com/YYC-Cube/YYC3-Design-System/issues)** - Bug reports and feature requests
-- **[GitHub Discussions](https://github.com/YYC-Cube/YYC3-Design-System/discussions)** - Community discussions
+- **[GitHub Issues](https://github.com/YYC-Cube/YYC3-UI-Design-System/issues)** - Bug reports and feature requests
+- **[GitHub Discussions](https://github.com/YYC-Cube/YYC3-UI-Design-System/discussions)** - Community discussions
 - **[Email](mailto:support@yyc3.com)** - Direct support
 - **[Discord](https://discord.gg/yyc3)** - Real-time chat
 
@@ -796,7 +796,7 @@ This project uses the following open source packages:
 
 If you find YYC³ Design System helpful, please consider giving us a star on GitHub!
 
-**[⭐ Star](https://github.com/YYC-Cube/YYC3-Design-System/stargazers)**
+**[⭐ Star](https://github.com/YYC-Cube/YYC3-UI-Design-System/stargazers)**
 
 ---
 
