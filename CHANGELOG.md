@@ -42,6 +42,9 @@ language: zh-CN
 - CHANGELOG.md 标头规范化（YAML front matter）
 - package.json engines 更新为 node >= 22、pnpm >= 10
 - 禁用冗余工作流（ci-cd-backup.yml、ci-cd-intelligent.yml）
+- 修复 CI 中 Jest 参数传递问题
+- .gitignore 完善（新增 .pnpm-store、*.backup、stats.html）
+- GitHub Pages 配置验证通过（build_type: workflow, https_enforced: true）
 
 ### 移除 (Removed)
 - 清理 22 个过期临时总结文件（CI-CD-*.md、CRUSH-*.md、*-SUMMARY.md 等）
