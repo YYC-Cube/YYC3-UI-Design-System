@@ -6,13 +6,25 @@ on:
   workflow_dispatch:
 
 env:
-  NODE_VERSION: '20'
-  PNPM_VERSION: '9'
+  NODE_VERSION: '22'
+  PNPM_VERSION: '10'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://design-ui.yyc3.top
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,24 +44,26 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build
-        run: pnpm run build
+        run: pnpm build
 
-      - name: Configure Git
+      - name: Verify CNAME
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if [ ! -f dist/CNAME ]; then
+            echo "design-ui.yyc3.top" > dist/CNAME
+          fi
+          echo "CNAME: $(cat dist/CNAME)"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          force_orphan: true
-          commit_message: 'Deploy to GitHub Pages - ${{ github.sha }}'
-          cname: ''
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: Deployment Summary
         run: |
@@ -59,82 +73,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "📊 **部署信息**:" >> $GITHUB_STEP_SUMMARY
           echo "- **环境**: GitHub Pages (Production)" >> $GITHUB_STEP_SUMMARY
-          echo "- **URL**: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_STEP_SUMMARY
-          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL**: https://design-ui.yyc3.top" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
           echo "- **Triggered by**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Time**: ${{ github.event.head_commit.timestamp }}" >> $GITHUB_STEP_SUMMARY
-
-      - name: Create Deployment Comment
-        if: github.event_name == 'push'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const comment = `
-            ## 🚀 部署通知
-            
-            ✅ **部署成功！**
-            
-            ### 部署信息
-            - **环境**: GitHub Pages (Production)
-            - **URL**: https://${context.repo.owner}.github.io/${context.repo.repository}/
-            - **Commit**: ${context.sha}
-            - **分支**: ${context.ref}
-            - **触发者**: ${context.actor}
-            
-            ---
-            
-            🎉 部署已完成！访问上面的 URL 查看最新版本。
-            `;
-            
-            github.rest.repos.createCommitComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: context.sha,
-              body: comment
-            });
-
-  rollback:
-    name: Rollback Deployment
-    runs-on: ubuntu-latest
-    if: failure() && github.event_name == 'push'
-    needs: deploy
-    steps:
-      - name: Notify Failure
-        run: |
-          echo "## ❌ 部署失败" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "❌ **状态**: 部署失败" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 错误信息" >> $GITHUB_STEP_SUMMARY
-          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **分支**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **触发者**: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "请检查构建日志以获取更多信息。" >> $GITHUB_STEP_SUMMARY
-
-      - name: Create Failure Comment
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const comment = `
-            ## ❌ 部署失败
-            
-            部署过程中出现错误，请检查 CI/CD 日志。
-            
-            ### 部署信息
-            - **Commit**: ${context.sha}
-            - **分支**: ${context.ref}
-            - **触发者**: ${context.actor}
-            
-            ---
-            
-            请查看 Actions 标签页面的详细日志以排查问题。
-            `;
-            
-            github.rest.repos.createCommitComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: context.sha,
-              body: comment
-            });

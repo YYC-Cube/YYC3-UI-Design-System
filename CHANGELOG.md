@@ -1,12 +1,14 @@
 ---
-@file: CHANGELOG.md
-@description: YYC³ Design System 版本更新日志
-@author: YanYuCloudCube Team
-@version: 2.0.0
-@created: 2026-03-01
-@updated: 2026-03-01
-@status: active
-@tags: changelog, version-history, release-notes
+file: CHANGELOG.md
+description: YYC³ Design System 版本更新日志
+author: YanYuCloudCube Team <admin@0379.email>
+version: v2.1.0
+created: 2026-03-01
+updated: 2026-05-22
+status: stable
+tags: [changelog],[version-history],[release-notes]
+category: general
+language: zh-CN
 ---
 
 > ***YanYuCloudCube***
@@ -23,6 +25,28 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)，
 版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/)。
+
+## [2.1.0] - 2026-05-22
+
+### 新增 (Added)
+- GitHub Actions CI/CD 流水线：质量检查 + 测试 + 构建 + 自动部署
+- GitHub Pages 自动部署（自定义域名 design-ui.yyc3.top）
+- public/CNAME 文件（GitHub Pages 自定义域名）
+- LICENSE 文件（MIT 许可证）
+- CODE_OF_CONDUCT.md（社区行为准则，基于 Contributor Covenant 2.0）
+
+### 改进 (Changed)
+- 升级所有工作流至 Node 22 + pnpm 10
+- README.md / README.zh-CN.md 全面重写，符合 YYC³ 文档规范
+- CONTRIBUTING.md 全面重写，补充 Conventional Commits 规范
+- CHANGELOG.md 标头规范化（YAML front matter）
+- package.json engines 更新为 node >= 22、pnpm >= 10
+- 禁用冗余工作流（ci-cd-backup.yml、ci-cd-intelligent.yml）
+
+### 移除 (Removed)
+- 清理 22 个过期临时总结文件（CI-CD-*.md、CRUSH-*.md、*-SUMMARY.md 等）
+- 删除冗余 README 副本（README-OPTIMIZED.md、README-OPEN-SOURCE.md 等）
+- 删除与 CHANGELOG 重复的 RELEASE_NOTES.md
 
 ## [2.0.0] - 2026-03-01
 

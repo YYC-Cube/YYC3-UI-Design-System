@@ -1,4 +1,15 @@
-# YYC³ Design System 贡献指南
+---
+file: CONTRIBUTING.md
+description: YYC³ Design System 贡献指南 — 开发环境设置、代码规范、提交规范和 PR 流程
+author: YanYuCloudCube Team <admin@0379.email>
+version: v2.0.0
+created: 2026-02-22
+updated: 2026-05-22
+status: stable
+tags: [contributing],[guide],[development],[workflow]
+category: guide
+language: zh-CN
+---
 
 > ***YanYuCloudCube***
 > *言启象限 | 语枢未来*
@@ -8,383 +19,198 @@
 
 ---
 
-感谢您对 YYC³ Design System 的关注！我们欢迎所有形式的贡献。
+# 贡献指南
+
+感谢您对 YYC³ Design System 的关注！本文档帮助您快速参与项目贡献。
 
 ## 📋 目录
 
 - [行为准则](#行为准则)
-- [如何贡献](#如何贡献)
-- [开发环境设置](#开发环境设置)
+- [环境要求](#环境要求)
+- [开发流程](#开发流程)
 - [代码规范](#代码规范)
 - [提交规范](#提交规范)
 - [Pull Request 流程](#pull-request-流程)
 - [测试要求](#测试要求)
-- [文档要求](#文档要求)
 
 ## 行为准则
 
-- 尊重所有贡献者
-- 建设性地讨论问题
-- 专注于对项目最有利的事情
-- 保持友善和包容
+参与本项目即表示您同意遵守我们的 [Code of Conduct](CODE_OF_CONDUCT.md)。
 
-## 如何贡献
+## 环境要求
 
-### 报告 Bug
+| 工具 | 最低版本 | 推荐版本 |
+|------|----------|----------|
+| Node.js | 22.0.0 | 22.x LTS |
+| pnpm | 10.0.0 | 10.x |
+| Git | 2.30.0 | latest |
 
-在提交 Bug 报告前，请确保：
+## 开发流程
 
-1. 搜索现有的 [Issues](https://github.com/YYC-Cube/YYC3-Design-System/issues)，确认问题未被报告
-2. 使用 Bug 报告模板提供详细信息
-3. 包含复现步骤、预期行为和实际行为
-4. 提供环境信息（操作系统、浏览器版本等）
-
-### 提出新功能
-
-1. 先在 [Discussions](https://github.com/YYC-Cube/YYC3-Design-System/discussions) 讨论想法
-2. 提供详细的功能描述和使用场景
-3. 说明为什么这个功能对项目有价值
-4. 考虑是否愿意自己实现这个功能
-
-### 提交代码
-
-1. Fork 仓库并创建特性分支
-2. 按照代码规范编写代码
-3. 添加测试并确保通过
-4. 更新相关文档
-5. 提交 Pull Request
-
-### 改进文档
-
-1. 识别需要改进的文档部分
-2. 提出改进建议或在 Discussions 讨论
-3. Fork 仓库并创建文档分支
-4. 更新文档并提交 Pull Request
-
-## 开发环境设置
-
-### 前置要求
-
-- Node.js >= 16.0.0
-- npm >= 7.0.0 或 pnpm >= 7.0.0
-- Git
-
-### 克隆仓库
+### 1. Fork & Clone
 
 ```bash
-git clone https://github.com/YYC-Cube/YYC3-Design-System.git
+git clone https://github.com/YOUR_USERNAME/YYC3-Design-System.git
 cd YYC3-Design-System
-```
-
-### 安装依赖
-
-```bash
-npm install
-# 或
 pnpm install
 ```
 
-### 启动开发服务器
+### 2. 创建分支
 
 ```bash
-npm run dev
+git checkout -b feature/your-feature-name
 ```
 
-### 运行测试
+分支命名规范：
+
+| 类型 | 格式 | 示例 |
+|------|------|------|
+| 新功能 | `feature/*` | `feature/button-loading-state` |
+| Bug 修复 | `bugfix/*` | `bugfix/modal-close-focus` |
+| 紧急修复 | `hotfix/*` | `hotfix/security-xss` |
+| 文档 | `docs/*` | `docs/api-reference` |
+| 重构 | `refactor/*` | `refactor/theme-system` |
+
+### 3. 开发 & 测试
 
 ```bash
-npm test
+pnpm dev              # 启动开发服务器 (port 3200)
+pnpm storybook        # 启动 Storybook (port 6006)
+pnpm test             # 运行测试
+pnpm test:watch       # 监听模式
+pnpm lint             # 代码检查
+pnpm typecheck        # 类型检查
 ```
 
-### 构建项目
+### 4. 提交代码
 
 ```bash
-npm run build
+git add .
+git commit -m 'feat: add loading state to Button component'
+git push origin feature/your-feature-name
 ```
 
 ## 代码规范
 
-### TypeScript 规范
+### TypeScript / React
 
-- 使用 TypeScript 进行类型定义
-- 避免使用 `any` 类型
-- 为函数添加返回类型
-- 使用接口定义对象类型
-- 为复杂类型添加注释
+- 遵循项目内 ESLint + Prettier 配置
+- 所有组件使用 TypeScript strict mode
+- 新组件必须包含 JSDoc 文件头注释（参照 YYC³ 规范）
+- 使用函数式组件 + Hooks
 
-### React 规范
-
-- 使用函数组件和 Hooks
-- 组件使用 PascalCase 命名
-- 文件名与组件名一致
-- 使用 `useCallback` 和 `useMemo` 优化性能
-- 为 Props 定义接口
+### 组件文件头模板
 
 ```typescript
-interface ButtonProps {
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
-}
-
-export const Button: React.FC<ButtonProps> = ({ label, onClick, disabled = false }) => {
-  const handleClick = useCallback(() => {
-    if (!disabled) {
-      onClick();
-    }
-  }, [disabled, onClick]);
-
-  return (
-    <button onClick={handleClick} disabled={disabled}>
-      {label}
-    </button>
-  );
-};
+/**
+ * file: ComponentName.tsx
+ * description: 组件功能简要描述
+ * author: Your Name
+ * version: v1.0.0
+ * created: 2026-05-22
+ * updated: 2026-05-22
+ * status: active
+ * tags: [component],[ui]
+ */
 ```
 
-### 样式规范
+### 样式
 
-- 使用 Tailwind CSS 进行样式
-- 避免内联样式
-- 使用语义化的类名
-- 遵循 BEM 命名约定（必要时）
+- 使用 Tailwind CSS utility classes
+- 复杂样式使用 `class-variance-authority` (CVA) 定义变体
+- 遵循 shadcn/ui 的 `cn()` 合并模式
 
-### 命名规范
+### 测试
 
-- **文件名**：kebab-case (如: `user-service.ts`)
-- **组件名**：PascalCase (如: `UserService`)
-- **函数/变量**：camelCase (如: `getUserById`)
-- **常量**：UPPER_SNAKE_CASE (如: `MAX_RETRY_COUNT`)
-- **类型/接口**：PascalCase (如: `User`)
+- 新组件必须包含单元测试
+- 关键交互必须包含集成测试
+- 测试文件与源文件同目录：`Button.tsx` → `Button.test.tsx`
 
 ## 提交规范
 
-### 提交消息格式
-
-遵循 [Conventional Commits](https://conventionalcommits.org/) 规范：
+遵循 [Conventional Commits](https://www.conventionalcommits.org/)：
 
 ```
-<类型>[可选 范围]: <描述>
+<type>(<scope>): <description>
 
-[可选 主体]
+[optional body]
 
-[可选 页脚]
+[optional footer]
 ```
 
 ### 提交类型
 
-- `feat`: 新功能
-- `fix`: Bug 修复
-- `docs`: 文档更新
-- `style`: 代码格式调整（不影响功能）
-- `refactor`: 代码重构
-- `perf`: 性能优化
-- `test`: 测试相关
-- `chore`: 构建/工具变动
-- `ci`: CI/CD 相关
-- `build`: 构建系统变动
+| 类型 | 说明 |
+|------|------|
+| `feat` | 新功能 |
+| `fix` | Bug 修复 |
+| `docs` | 文档更新 |
+| `style` | 代码格式（不影响功能） |
+| `refactor` | 代码重构 |
+| `perf` | 性能优化 |
+| `test` | 测试相关 |
+| `chore` | 构建/工具变动 |
+| `ci` | CI/CD 相关 |
 
-### 提交示例
+### 示例
 
-```bash
-feat(theme): 添加暗色主题支持
-
-实现暗色主题功能，包括：
-- 添加暗色主题令牌
-- 实现主题切换组件
-- 更新所有组件以支持暗色主题
-
-Closes #123
 ```
-
-### 提交前检查
-
-提交代码前请运行：
-
-```bash
-npm run typecheck  # 类型检查
-npm run lint       # 代码检查
-npm test           # 运行测试
+feat(button): add loading state variant
+fix(dialog): resolve focus trap issue on close
+docs(readme): update installation instructions
+refactor(theme): extract color tokens to shared module
 ```
 
 ## Pull Request 流程
 
+### PR 检查清单
+
+- [ ] 代码通过 `pnpm lint` 无错误
+- [ ] 类型检查通过 `pnpm typecheck`
+- [ ] 所有测试通过 `pnpm test`
+- [ ] 新功能有对应的测试覆盖
+- [ ] 文件头注释完整
+- [ ] 无硬编码密钥或敏感信息
+
 ### PR 标题格式
 
-使用与提交消息相同的格式：
-
-```
-<类型>[可选 范围]: <描述>
-```
+与提交规范一致：`feat(button): add loading state variant`
 
 ### PR 描述模板
 
 ```markdown
 ## 变更类型
-- [ ] Bug 修复
-- [ ] 新功能
-- [ ] 重大变更
-- [ ] 文档更新
+- [ ] feat: 新功能
+- [ ] fix: Bug 修复
+- [ ] refactor: 重构
+- [ ] docs: 文档
 
-## 变更描述
-简要描述此 PR 的变更内容
+## 变更说明
+简要描述本次变更的内容和原因
 
-## 相关 Issue
-Closes #(issue number)
+## 影响范围
+列出受影响的组件或模块
 
 ## 测试
-- [ ] 单元测试通过
-- [ ] 集成测试通过
-- [ ] E2E 测试通过
-- [ ] 手动测试完成
-
-## 截图（如适用）
-添加变更前后的截图
-
-## 检查清单
-- [ ] 代码遵循项目规范
-- [ ] 添加了必要的测试
-- [ ] 更新了相关文档
-- [ ] 提交消息符合规范
+描述如何验证本次变更
 ```
 
-### PR 审查流程
+## 报告 Bug
 
-1. 所有 PR 需要通过 CI 检查
-2. 至少一位维护者审查批准
-3. 解决所有审查意见
-4. 合并到目标分支
+1. 搜索 [已有 Issues](https://github.com/YYC-Cube/YYC3-Design-System/issues) 确认未被报告
+2. 使用 Bug 报告模板
+3. 包含：复现步骤、预期行为、实际行为、环境信息
 
-### 合并策略
+## 提出新功能
 
-- `main` 分支：使用 Squash and Merge
-- `develop` 分支：使用 Merge Commit
-
-## 测试要求
-
-### 单元测试
-
-- 为新功能添加单元测试
-- 测试覆盖率不低于 80%
-- 使用 Jest 和 React Testing Library
-
-```typescript
-describe('Button', () => {
-  it('应该渲染标签文本', () => {
-    render(<Button label="Click me" onClick={vi.fn()} />);
-    expect(screen.getByText('Click me')).toBeInTheDocument();
-  });
-
-  it('应该在点击时调用 onClick', () => {
-    const handleClick = vi.fn();
-    render(<Button label="Click me" onClick={handleClick} />);
-    fireEvent.click(screen.getByText('Click me'));
-    expect(handleClick).toHaveBeenCalledTimes(1);
-  });
-});
-```
-
-### 集成测试
-
-- 测试组件间的交互
-- 测试与外部服务的集成
-- 测试用户流程
-
-### E2E 测试
-
-- 使用 Playwright 编写 E2E 测试
-- 测试关键用户路径
-- 测试跨浏览器兼容性
-
-### 测试命令
-
-```bash
-npm run test:unit          # 单元测试
-npm run test:integration   # 集成测试
-npm run test:e2e          # E2E 测试
-npm run test:coverage     # 覆盖率测试
-```
-
-## 文档要求
-
-### 代码注释
-
-- 为复杂逻辑添加注释
-- 解释为什么这样做，而不是做了什么
-- 保持注释简洁明了
-
-### 组件文档
-
-- 添加 JSDoc 注释
-- 描述 Props 和返回值
-- 提供使用示例
-
-```typescript
-/**
- * 按钮组件
- * @description 可点击的按钮组件，支持禁用状态
- * @param label - 按钮标签文本
- * @param onClick - 点击回调函数
- * @param disabled - 是否禁用按钮
- * @returns JSX 元素
- */
-export const Button: React.FC<ButtonProps> = ({ label, onClick, disabled }) => {
-  // ...
-};
-```
-
-### README 更新
-
-- 新功能需要更新 README
-- 添加使用示例
-- 更新变更日志
-
-### Storybook
-
-- 为新组件添加 Story
-- 包含不同状态的示例
-- 添加文档说明
-
-## 发布流程
-
-### 版本号
-
-遵循语义化版本：
-- `MAJOR.MINOR.PATCH`
-- 重大变更：增加 MAJOR
-- 新功能：增加 MINOR
-- Bug 修复：增加 PATCH
-
-### 发布步骤
-
-1. 更新版本号
-2. 更新 CHANGELOG.md
-3. 创建 Git 标签
-4. 发布到 npm
-5. 创建 GitHub Release
-
-## 社区
-
-### 获取帮助
-
-- 查看 [文档](docs/)
-- 在 [Issues](https://github.com/YYC-Cube/YYC3-Design-System/issues) 提问
-- 在 [Discussions](https://github.com/YYC-Cube/YYC3-Design-System/discussions) 讨论
-
-### 联系方式
-
-- Email: [admin@0379.email](mailto:admin@0379.email)
-- GitHub: [@YYC-Cube](https://github.com/YYC-Cube)
+1. 在 [Discussions](https://github.com/YYC-Cube/YYC3-Design-System/discussions) 发起讨论
+2. 描述功能需求和使用场景
+3. 说明对项目的价值
 
 ---
 
-再次感谢您的贡献！🎉
-
 <div align="center">
 
-> 「***YanYuCloudCube***」
-> 「***<admin@0379.email>***」
-> 「***Words Initiate Quadrants, Language Serves as Core for Future***」
-> 「***All things converge in cloud pivot; Deep stacks ignite a new era of intelligence***」
+感谢您的贡献！每一个 PR 都让 YYC³ Design System 更好。
 
 </div>

@@ -8,7 +8,8 @@ reports/
 .env.local
 .env.*.local
 
-# Cache directories
+.pnpm-store/
+
 .jest-cache/
 .cache/
 .parcel-cache/
@@ -18,22 +19,24 @@ reports/
 .turbo/
 .chromatic/
 
-# Test coverage
 *.lcov
 
-# Build artifacts
 *.tsbuildinfo
 
-# IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# OS
 Thumbs.db
 
-# Playwright test results
 playwright-report/
 test-results/
+
+*.backup
+*.backup2
+*.backup3
+*.bak
+
+stats.html
